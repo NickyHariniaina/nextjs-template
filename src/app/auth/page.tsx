@@ -90,15 +90,15 @@ export default function AuthPage() {
             
             <div className="flex items-center gap-8 mt-12">
               <div className="flex -space-x-3">
-                {['👤', '👤', '👤', '👤', '👤'].map((_, i) => (
+                {['JD', 'AS', 'MK', 'RL', 'TW'].map((initials, i) => (
                   <motion.div 
                     key={i}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.5 + i * 0.1 }}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 border-2 border-slate-900 flex items-center justify-center text-white text-xs"
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 border-2 border-slate-900 flex items-center justify-center text-white text-xs font-medium"
                   >
-                    {i + 1}
+                    {initials}
                   </motion.div>
                 ))}
               </div>
