@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-body: var(--font-raleway);
+  --font-display: var(--font-outfit);
+  --font-body: var(--font-jakarta);
 }
 
 * {
@@ -9,57 +10,168 @@
 }
 
 body {
-  background: #ffffff;
-  color: #1a1a1a;
-  font-family: var(--font-raleway);
+  background: #09090b;
+  color: #fafafa;
+  font-family: var(--font-jakarta);
+  overflow: hidden;
 }
 
-.input-field {
-  background: #fafafa;
-  border: 1px solid #e5e5e5;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Aurora background effect */
+.aurora {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.aurora::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 219, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+  animation: aurora-move 20s ease-in-out infinite;
+}
+
+.aurora::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, #09090b 70%);
+}
+
+@keyframes aurora-move {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(5deg); }
+  66% { transform: translate(-20px, 20px) rotate(-5deg); }
+}
+
+/* Noise texture overlay */
+.noise {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Input styling */
+.input-dark {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fafafa;
   transition: all 0.2s ease;
 }
 
-.input-field:focus {
-  border-color: #2563eb;
-  background: #ffffff;
+.input-dark:focus {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.05);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
 }
 
-.input-field::placeholder {
-  color: #a3a3a3;
+.input-dark::placeholder {
+  color: rgba(250, 250, 250, 0.3);
 }
 
-.btn-primary {
-  background: #2563eb;
+/* Primary button */
+.btn-gradient {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
   transition: all 0.25s ease;
 }
 
-.btn-primary:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.btn-primary:active {
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
+}
+
+.btn-gradient:hover::before {
+  opacity: 1;
+}
+
+.btn-gradient:active {
   transform: translateY(0);
 }
 
-.btn-primary:disabled {
+.btn-gradient:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
-.social-btn {
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+/* Social button */
+.btn-social {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fafafa;
   transition: all 0.2s ease;
 }
 
-.social-btn:hover {
-  background: #fafafa;
-  border-color: #d4d4d4;
+.btn-social:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Accent gradient line */
+.gradient-line {
+  position: relative;
+}
+
+.gradient-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8b5cf6, #ec4899, #f97316, transparent);
+  opacity: 0.5;
 }

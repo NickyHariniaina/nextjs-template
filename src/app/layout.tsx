@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const raleway = Raleway({
-  variable: "--font-raleway",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -20,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={raleway.variable}>
+    <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );

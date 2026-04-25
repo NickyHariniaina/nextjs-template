@@ -39,7 +39,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
           Full Name
         </label>
         <input
@@ -49,14 +49,14 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400"
-          style={{ fontFamily: 'var(--font-raleway)' }}
+          className="input-dark w-full rounded-xl px-4 py-3.5 placeholder:text-slate-500"
+          style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="John Doe"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
           Email
         </label>
         <input
@@ -66,14 +66,14 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400"
-          style={{ fontFamily: 'var(--font-raleway)' }}
+          className="input-dark w-full rounded-xl px-4 py-3.5 placeholder:text-slate-500"
+          style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
           Password
         </label>
         <input
@@ -84,8 +84,8 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-xl px-4 py-3 text-slate-900"
-          style={{ fontFamily: 'var(--font-raleway)' }}
+          className="input-dark w-full rounded-xl px-4 py-3.5"
+          style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="Min. 6 characters"
         />
       </div>
@@ -94,7 +94,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         <motion.p
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600"
+          className="text-sm text-red-400"
         >
           {error}
         </motion.p>
@@ -103,8 +103,8 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary w-full flex items-center justify-center py-3 rounded-xl font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
-        style={{ fontFamily: 'var(--font-raleway)' }}
+        className="btn-gradient w-full flex items-center justify-center py-3.5 rounded-xl font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+        style={{ fontFamily: 'var(--font-jakarta)' }}
       >
         {loading ? (
           <Loader2 className="w-5 h-5 animate-spin" />
