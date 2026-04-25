@@ -1,5 +1,9 @@
+'use client';
+
 import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
+import { Mail, Lock, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface SignInFormProps {
   onSuccess: () => void;
@@ -19,9 +23,9 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
     try {
       await authClient.signIn.email({ email, password });
       onSuccess();
-    } catch (err: any) {
-      // Better Auth throws an error with a message
-      setError(err.message || 'An error occurred during sign in');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Invalid credentials';
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -30,47 +34,58 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-white">
-          Email address
+        <label htmlFor="email" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 uppercase tracking-wide">
+          Email
         </label>
         <input
           id="email"
           type="email"
           required
-          className="mt-1 block w-full rounded-md bg-white/10 border border-white/20 placeholder-white/50 text-white shadow-sm focus:border-white focus:ring-2 focus:ring-white/50 focus:ring-opacity-50"
-          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
+          className="input-field w-full rounded-lg px-4 py-2.5 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+          placeholder="you@example.com"
         />
       </div>
+
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-white">
+        <label htmlFor="password" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 uppercase tracking-wide">
           Password
         </label>
         <input
           id="password"
           type="password"
           required
-          minLength="6"
-          className="mt-1 block w-full rounded-md bg-white/10 border border-white/20 placeholder-white/50 text-white shadow-sm focus:border-white focus:ring-2 focus:ring-white/50 focus:ring-opacity-50"
-          placeholder="Enter your password"
+          minLength={6}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
+          className="input-field w-full rounded-lg px-4 py-2.5 text-[var(--text-primary)]"
+          placeholder="••••••••"
         />
       </div>
 
       {error && (
-        <p className="text-sm text-red-400">{error}</p>
+        <motion.p
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-sm text-red-600"
+        >
+          {error}
+        </motion.p>
       )}
 
       <button
         type="submit"
-        className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-white/20 hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/50 disabled:opacity-50"
         disabled={loading}
+        className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
       >
-        {loading ? 'Signing in...' : 'Sign in'}
+        {loading ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          'Sign in'
+        )}
       </button>
     </form>
   );

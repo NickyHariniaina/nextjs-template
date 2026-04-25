@@ -1,82 +1,89 @@
-'use client'
+'use client';
+
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SignInForm } from '@/components/SignInForm';
 import { SignUpForm } from '@/components/SignUpForm';
+import { ArrowRight } from 'lucide-react';
 
-export default function AuthTogglePage() {
-  const [showSignUp, setShowSignUp] = useState(false);
+export default function AuthPage() {
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleAuthSuccess = () => {
-    // In a real app, you might redirect to a protected route or home page.
-    // For now, we'll just reset the forms and show a success message via alert.
-    // Alternatively, you could use Next.js router to redirect.
-    // Since we don't have a protected route yet, we'll just alert and reset.
-    alert('Authentication successful!');
-    // Reset the toggle to sign-in form after success
-    setShowSignUp(false);
+    window.location.href = '/';
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[repeating-linear-gradient(45deg,#000000,#000000 20px,#ffffff 20px,#ffffff 40px)] dark:bg-[repeating-linear-gradient(45deg,#ffffff,#ffffff 20px,#000000 20px,#000000 40px)] p-4">
-      <div 
-        className="relative w-full max-w-md space-y-6 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 shadow-2xl shadow-white/10"
-        style={{ perspective: '1000px' }}
+    <div className="min-h-screen flex items-center justify-center bg-[var(--bg-primary)]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--accent-gold)_0%,_transparent_50%)] opacity-5" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--text-primary)_0%,_transparent_50%)] opacity-3" />
+
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-sm mx-4"
       >
-        <div 
-          className={`absolute w-full h-full ${showSignUp ? 'flipped' : ''}`} 
-          style={{
-            transformStyle: 'preserve-3d',
-            transition: 'transform 0.6s ease-in-out',
-            backfaceVisibility: 'hidden'
-          }}
-          onClick={e => e.stopPropagation()}
-        >
-          {!showSignUp && (
-            <div className="relative w-full h-full">
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-center text-white">
-                  Sign in to your account
-                </h2>
-                <SignInForm onSuccess={handleAuthSuccess} />
-                <div className="text-center text-sm">
-                  <p className="text-white/50">
-                    Don't have an account?
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setShowSignUp(!showSignUp)}
-                    className="font-medium text-white hover:text-white/80 underline"
-                  >
-                    Sign up
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {showSignUp && (
-            <div className="relative w-full h-full" style={{ transform: 'rotateY(180deg)' }}>
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-center text-white">
-                  Create Account
-                </h2>
-                <SignUpForm onSuccess={handleAuthSuccess} />
-                <div className="text-center text-sm">
-                  <p className="text-white/50">
-                    Already have an account?
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setShowSignUp(!showSignUp)}
-                    className="font-medium text-white hover:text-white/80 underline"
-                  >
-                    Sign in
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+        <div className="text-center mb-8">
+          <motion.div 
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--text-primary)] mb-6"
+          >
+            <span className="text-[var(--bg-primary)] font-[family-name:var(--font-space)] font-bold text-xl">H</span>
+          </motion.div>
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="font-[family-name:var(--font-space)] text-2xl font-semibold text-[var(--text-primary)] tracking-tight"
+          >
+            Welcome back
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mt-2 text-[var(--text-muted)] font-[family-name:var(--font-body)]"
+          >
+            {isSignUp ? 'Create your account' : 'Sign in to continue'}
+          </motion.p>
         </div>
-      </div>
+
+        <div className="glass-card rounded-2xl p-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isSignUp ? 'signup' : 'signin'}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isSignUp ? (
+                <SignUpForm onSuccess={handleAuthSuccess} />
+              ) : (
+                <SignInForm onSuccess={handleAuthSuccess} />
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="mt-6 pt-6 border-t border-[var(--border-color)]">
+            <p className="text-center text-[var(--text-muted)] text-sm">
+              {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+              {' '}
+              <button
+                onClick={() => setIsSignUp(!isSignUp)}
+                className="text-[var(--text-primary)] font-medium hover:underline cursor-pointer"
+              >
+                {isSignUp ? 'Sign in' : 'Sign up'}
+              </button>
+            </p>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
