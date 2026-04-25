@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: var(--font-space);
+  --font-body: var(--font-dm);
 }
-
 
 * {
   box-sizing: border-box;
@@ -14,7 +12,7 @@
 body {
   background: #ffffff;
   color: #171717;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-dm);
 }
 
 .glass-card {

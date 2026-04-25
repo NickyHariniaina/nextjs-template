@@ -50,6 +50,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           onChange={(e) => setName(e.target.value)}
           disabled={loading}
           className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717] placeholder:text-[#737373]"
+          style={{ fontFamily: 'var(--font-dm)' }}
           placeholder="Your name"
         />
       </div>
@@ -66,6 +67,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
           className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717] placeholder:text-[#737373]"
+          style={{ fontFamily: 'var(--font-dm)' }}
           placeholder="you@example.com"
         />
       </div>
@@ -83,6 +85,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
           className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717]"
+          style={{ fontFamily: 'var(--font-dm)' }}
           placeholder="Min. 6 characters"
         />
       </div>
@@ -101,6 +104,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         type="submit"
         disabled={loading}
         className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+        style={{ fontFamily: 'var(--font-dm)' }}
       >
         {loading ? (
           <Loader2 className="w-4 h-4 animate-spin" />

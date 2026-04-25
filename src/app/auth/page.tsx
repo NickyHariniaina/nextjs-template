@@ -30,7 +30,7 @@ export default function AuthPage() {
             transition={{ delay: 0.1, duration: 0.4 }}
             className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#171717] mb-6"
           >
-            <span className="text-white font-bold text-xl" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>H</span>
+            <span className="text-white font-bold text-xl" style={{ fontFamily: 'var(--font-space)' }}>H</span>
           </motion.div>
           
           <motion.h1 
@@ -38,7 +38,7 @@ export default function AuthPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
             className="text-2xl font-semibold text-[#171717] tracking-tight"
-            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+            style={{ fontFamily: 'var(--font-space)' }}
           >
             Welcome back
           </motion.h1>
@@ -48,7 +48,7 @@ export default function AuthPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="mt-2 text-[#737373]"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+            style={{ fontFamily: 'var(--font-dm)' }}
           >
             {isSignUp ? 'Create your account' : 'Sign in to continue'}
           </motion.p>
