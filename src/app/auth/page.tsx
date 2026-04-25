@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SignInForm } from '@/components/SignInForm';
 import { SignUpForm } from '@/components/SignUpForm';
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const router = useRouter();
 
   const handleAuthSuccess = () => {
-    window.location.href = '/';
+    router.push('/');
   };
 
   return (
