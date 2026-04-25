@@ -32,9 +32,9 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="email" className="block text-xs font-medium text-[#404040] mb-1.5 uppercase tracking-wide">
+        <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
           Email
         </label>
         <input
@@ -44,16 +44,21 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717] placeholder:text-[#737373]"
-          style={{ fontFamily: 'var(--font-dm)' }}
+          className="input-field w-full rounded-xl px-4 py-3 text-slate-900 placeholder:text-slate-400"
+          style={{ fontFamily: 'var(--font-raleway)' }}
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-xs font-medium text-[#404040] mb-1.5 uppercase tracking-wide">
-          Password
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+            Password
+          </label>
+          <button type="button" className="text-sm text-blue-600 hover:text-blue-700 cursor-pointer">
+            Forgot?
+          </button>
+        </div>
         <input
           id="password"
           type="password"
@@ -62,8 +67,8 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717]"
-          style={{ fontFamily: 'var(--font-dm)' }}
+          className="input-field w-full rounded-xl px-4 py-3 text-slate-900"
+          style={{ fontFamily: 'var(--font-raleway)' }}
           placeholder="••••••••"
         />
       </div>
@@ -81,11 +86,11 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className="btn-primary w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
-        style={{ fontFamily: 'var(--font-dm)' }}
+        className="btn-primary w-full flex items-center justify-center py-3 rounded-xl font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+        style={{ fontFamily: 'var(--font-raleway)' }}
       >
         {loading ? (
-          <Loader2 className="w-4 h-4 animate-spin" />
+          <Loader2 className="w-5 h-5 animate-spin" />
         ) : (
           'Sign in'
         )}

@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-space);
-  --font-body: var(--font-dm);
+  --font-body: var(--font-raleway);
 }
 
 * {
@@ -11,14 +10,8 @@
 
 body {
   background: #ffffff;
-  color: #171717;
-  font-family: var(--font-dm);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid #e5e5e5;
+  color: #1a1a1a;
+  font-family: var(--font-raleway);
 }
 
 .input-field {
@@ -28,20 +21,26 @@ body {
 }
 
 .input-field:focus {
-  border-color: #171717;
+  border-color: #2563eb;
+  background: #ffffff;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.05);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input-field::placeholder {
+  color: #a3a3a3;
 }
 
 .btn-primary {
-  background: #171717;
+  background: #2563eb;
   color: white;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .btn-primary:hover {
-  background: #404040;
+  background: #1d4ed8;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .btn-primary:active {
@@ -52,4 +51,15 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.social-btn {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+  background: #fafafa;
+  border-color: #d4d4d4;
 }
