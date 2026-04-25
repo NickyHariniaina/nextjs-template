@@ -31,7 +31,7 @@ export default function AuthPage() {
                 repeat: Infinity, 
                 ease: "linear" 
               }}
-              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl"
+              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-purple-500/10 blur-2xl"
             />
             <motion.div
               animate={{ 
@@ -43,7 +43,7 @@ export default function AuthPage() {
                 repeat: Infinity, 
                 ease: "linear" 
               }}
-              className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-fuchsia-500/10 blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-fuchsia-500/10 blur-2xl"
             />
             <motion.div
               animate={{ 
@@ -55,7 +55,7 @@ export default function AuthPage() {
                 repeat: Infinity, 
                 ease: "easeInOut" 
               }}
-              className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-indigo-500/10 blur-3xl"
+              className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-indigo-500/10 blur-2xl"
             />
           </div>
           

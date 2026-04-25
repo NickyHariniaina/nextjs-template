@@ -54,6 +54,7 @@ body {
     radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
   animation: aurora-move 20s ease-in-out infinite;
+  will-change: transform;
 }
 
 .aurora::after {
