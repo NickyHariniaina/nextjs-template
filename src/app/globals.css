@@ -1,75 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg-primary: var(--bg-primary);
-  --color-bg-secondary: var(--bg-secondary);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-accent: var(--accent-gold);
-  --font-display: var(--font-space);
-  --font-body: var(--font-dm);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
 }
 
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --text-primary: #171717;
-  --text-secondary: #404040;
-  --text-muted: #737373;
-  --accent-gold: #d4af37;
-  --border-color: #e5e5e5;
-}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-dm);
-}
-
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.4s ease-out forwards;
+  background: #ffffff;
+  color: #171717;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
+  border: 1px solid #e5e5e5;
 }
 
 .input-field {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
   transition: all 0.2s ease;
 }
 
 .input-field:focus {
-  border-color: var(--text-primary);
+  border-color: #171717;
   outline: none;
   box-shadow: 0 0 0 3px rgba(23, 23, 23, 0.05);
 }
 
 .btn-primary {
-  background: var(--text-primary);
+  background: #171717;
   color: white;
   transition: all 0.2s ease;
 }
 
-.btn-primary:hover:not(:disabled) {
-  background: var(--text-secondary);
+.btn-primary:hover {
+  background: #404040;
   transform: translateY(-1px);
 }
 
-.btn-primary:active:not(:disabled) {
+.btn-primary:active {
   transform: translateY(0);
 }
 

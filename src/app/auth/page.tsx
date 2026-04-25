@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SignInForm } from '@/components/SignInForm';
 import { SignUpForm } from '@/components/SignUpForm';
-import { ArrowRight } from 'lucide-react';
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -14,9 +13,9 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--bg-primary)]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--accent-gold)_0%,_transparent_50%)] opacity-5" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--text-primary)_0%,_transparent_50%)] opacity-3" />
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_#d4af37_0%,_transparent_50%)] opacity-5" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_#171717_0%,_transparent_50%)] opacity-3" />
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -29,16 +28,17 @@ export default function AuthPage() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--text-primary)] mb-6"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#171717] mb-6"
           >
-            <span className="text-[var(--bg-primary)] font-[family-name:var(--font-space)] font-bold text-xl">H</span>
+            <span className="text-white font-bold text-xl" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>H</span>
           </motion.div>
           
           <motion.h1 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="font-[family-name:var(--font-space)] text-2xl font-semibold text-[var(--text-primary)] tracking-tight"
+            className="text-2xl font-semibold text-[#171717] tracking-tight"
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
           >
             Welcome back
           </motion.h1>
@@ -47,7 +47,8 @@ export default function AuthPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="mt-2 text-[var(--text-muted)] font-[family-name:var(--font-body)]"
+            className="mt-2 text-[#737373]"
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             {isSignUp ? 'Create your account' : 'Sign in to continue'}
           </motion.p>
@@ -70,13 +71,13 @@ export default function AuthPage() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="mt-6 pt-6 border-t border-[var(--border-color)]">
-            <p className="text-center text-[var(--text-muted)] text-sm">
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-center text-[#737373] text-sm">
               {isSignUp ? 'Already have an account?' : "Don't have an account?"}
               {' '}
               <button
                 onClick={() => setIsSignUp(!isSignUp)}
-                className="text-[var(--text-primary)] font-medium hover:underline cursor-pointer"
+                className="text-[#171717] font-medium hover:underline cursor-pointer"
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
               </button>

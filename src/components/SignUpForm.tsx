@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
-import { Mail, Lock, User, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface SignUpFormProps {
@@ -39,7 +39,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 uppercase tracking-wide">
+        <label htmlFor="name" className="block text-xs font-medium text-[#404040] mb-1.5 uppercase tracking-wide">
           Name
         </label>
         <input
@@ -49,13 +49,13 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-lg px-4 py-2.5 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+          className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717] placeholder:text-[#737373]"
           placeholder="Your name"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 uppercase tracking-wide">
+        <label htmlFor="email" className="block text-xs font-medium text-[#404040] mb-1.5 uppercase tracking-wide">
           Email
         </label>
         <input
@@ -65,13 +65,13 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-lg px-4 py-2.5 text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+          className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717] placeholder:text-[#737373]"
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 uppercase tracking-wide">
+        <label htmlFor="password" className="block text-xs font-medium text-[#404040] mb-1.5 uppercase tracking-wide">
           Password
         </label>
         <input
@@ -82,7 +82,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
-          className="input-field w-full rounded-lg px-4 py-2.5 text-[var(--text-primary)]"
+          className="input-field w-full rounded-lg px-4 py-2.5 text-[#171717]"
           placeholder="Min. 6 characters"
         />
       </div>
