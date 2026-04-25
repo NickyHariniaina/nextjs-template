@@ -198,7 +198,14 @@ export default function AuthPage() {
               {' '}
               <button
                 onClick={() => setIsSignUp(!isSignUp)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setIsSignUp(!isSignUp);
+                  }
+                }}
                 className="text-white font-medium hover:text-purple-400 transition-colors cursor-pointer"
+                aria-label={isSignUp ? 'Switch to sign in' : 'Switch to sign up'}
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
               </button>
