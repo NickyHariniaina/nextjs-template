@@ -160,6 +160,11 @@ body {
   border-color: rgba(255, 255, 255, 0.15);
 }
 
+.btn-social:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
 /* Accent gradient line */
 .gradient-line {
   position: relative;
