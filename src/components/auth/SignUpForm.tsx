@@ -1,70 +1,154 @@
 'use client';
 
-import { useState } from 'react';
-import { signUp } from '@/lib/auth/auth-client';
-import { Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { registerSchema } from '@/lib/validation/auth';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type RegisterSchema, registerSchema } from "@/lib/validation/auth";
+import { signUp } from "@/lib/auth/auth-client";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { getFallbackAvatarUrlAction } from "@/app/actions/get-fallback-avatar-url.action";
 
 interface SignUpFormProps {
   onSuccess?: () => void;
 }
 
 export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
+  const form = useForm<RegisterSchema>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      username: "",
+      email: "",
+      password: "",
+    },
+    mode: "onSubmit",
+  });
 
-    const result = registerSchema.safeParse({ firstName: name.split(' ')[0], lastName: name.split(' ')[1] || '', email, password });
-    if (!result.success) {
-      setError(result.error.issues[0].message);
-      return;
-    }
-
-    setLoading(true);
+  const submitRegisterData = async (data: RegisterSchema) => {
+    setIsPending(true);
 
     try {
-      await signUp.email({ 
-        email, 
-        password, 
-        name: name || email.split('@')[0] 
+      await signUp.email({
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        image: getFallbackAvatarUrlAction(data.firstName, data.lastName),
+        password: data.password,
+        username: data.username,
+        fetchOptions: {
+          onRequest: () => {
+            setIsPending(true);
+          },
+          onResponse: () => {
+            setIsPending(false);
+            form.reset();
+          },
+          onError: (ctx) => {
+            if (ctx.error.code === "SCHEMA_VALIDATION_FAILED") {
+              toast.error(ctx.error.details.issues[0].message);
+              return;
+            }
+            toast.error(ctx.error.message);
+          },
+          onSuccess: () => {
+            toast.success("Account created successfully");
+            
+            if (onSuccess) {
+              onSuccess();
+            } else {
+              router.push("/profile");
+            }
+          },
+        },
       });
-      if (onSuccess) {
-        onSuccess();
-      } else {
-        window.location.href = '/profile';
-      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Registration failed';
-      setError(message);
+      toast.error(message);
     } finally {
-      setLoading(false);
+      setIsPending(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={form.handleSubmit(submitRegisterData)} className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="firstName" className="block text-xs font-medium text-slate-300 mb-1.5">
+            First Name
+          </label>
+          <input
+            id="firstName"
+            type="text"
+            {...form.register("firstName")}
+            disabled={isPending}
+            className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
+            style={{ fontFamily: 'var(--font-jakarta)' }}
+            placeholder="John"
+          />
+          {form.formState.errors.firstName && (
+            <motion.p
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs text-red-400 mt-1"
+            >
+              {form.formState.errors.firstName.message}
+            </motion.p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="lastName" className="block text-xs font-medium text-slate-300 mb-1.5">
+            Last Name
+          </label>
+          <input
+            id="lastName"
+            type="text"
+            {...form.register("lastName")}
+            disabled={isPending}
+            className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
+            style={{ fontFamily: 'var(--font-jakarta)' }}
+            placeholder="Doe"
+          />
+          {form.formState.errors.lastName && (
+            <motion.p
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs text-red-400 mt-1"
+            >
+              {form.formState.errors.lastName.message}
+            </motion.p>
+          )}
+        </div>
+      </div>
+
       <div>
-        <label htmlFor="name" className="block text-xs font-medium text-slate-300 mb-1.5">
-          Full Name
+        <label htmlFor="username" className="block text-xs font-medium text-slate-300 mb-1.5">
+          Username
         </label>
         <input
-          id="name"
+          id="username"
           type="text"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          disabled={loading}
+          {...form.register("username")}
+          disabled={isPending}
           className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
           style={{ fontFamily: 'var(--font-jakarta)' }}
-          placeholder="John Doe"
+          placeholder="john_doe123"
         />
+        {form.formState.errors.username && (
+          <motion.p
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xs text-red-400 mt-1"
+          >
+            {form.formState.errors.username.message}
+          </motion.p>
+        )}
       </div>
 
       <div>
@@ -74,14 +158,21 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         <input
           id="email"
           type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={loading}
+          {...form.register("email")}
+          disabled={isPending}
           className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="you@example.com"
         />
+        {form.formState.errors.email && (
+          <motion.p
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xs text-red-400 mt-1"
+          >
+            {form.formState.errors.email.message}
+          </motion.p>
+        )}
       </div>
 
       <div>
@@ -91,35 +182,30 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         <input
           id="password"
           type="password"
-          required
-          minLength={6}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
+          {...form.register("password")}
+          disabled={isPending}
           className="input-dark w-full rounded-lg px-3 py-2.5 text-sm"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="Min. 6 characters"
         />
+        {form.formState.errors.password && (
+          <motion.p
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xs text-red-400 mt-1"
+          >
+            {form.formState.errors.password.message}
+          </motion.p>
+        )}
       </div>
-
-      {error && (
-        <motion.p
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-xs text-red-400"
-        >
-          {error}
-        </motion.p>
-      )}
-
 
       <button
         type="submit"
-        disabled={loading}
+        disabled={isPending}
         className="btn-gradient w-full flex items-center justify-center py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
         style={{ fontFamily: 'var(--font-jakarta)' }}
       >
-        {loading ? (
+        {isPending ? (
           <Loader2 className="w-4 h-4 animate-spin" />
         ) : (
           'Create account'
