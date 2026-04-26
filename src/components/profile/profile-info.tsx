@@ -29,6 +29,8 @@ const ProfileInfo = () => {
           <span className="text-[#c5b5f0]">{user.firstName}</span>
           <span className="font-semibold text-white/60">Last name</span>
           <span className="text-[#c5b5f0]">{user.lastName}</span>
+                    <span className="font-semibold text-white/60">Username</span>
+          <span className="text-[#c5b5f0]">{user.username}</span>
         </div>
       </div>
       <SignOutButton />
