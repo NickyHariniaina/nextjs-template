@@ -11,15 +11,17 @@ export default function ProfileHeader() {
 
   return (
     <div className="flex flex-col items-center text-center gap-4">
-      <Avatar className="w-24 h-24 border-2 border-[#a089df]/30 shadow-lg">
-        <AvatarImage src={user.image ?? undefined} />
-      </Avatar>
+      <div className="w-24 h-24 rounded-full p-0.5 bg-gradient-to-br from-[#a089df] via-[#807be4] to-[#faa178] shadow-lg">
+        <Avatar className="w-full h-full bg-[#0d0a1e]">
+          <AvatarImage src={user.image ?? undefined} />
+        </Avatar>
+      </div>
       <div>
         <h1 className="font-semibold text-xl text-[#c5b5f0]">
           {user.firstName} {user.lastName}
         </h1>
         <span className="text-white/60 text-sm">@{user.username}</span>
-        <p className="text-white/40 text-xs mt-1">Member since Jan 2026</p>
+        <p className="text-white/40 text-sm mt-1">Member since Jan 2026</p>
       </div>
     </div>
   );
