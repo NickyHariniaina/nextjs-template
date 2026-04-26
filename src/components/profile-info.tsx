@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/store/useUserStore";
 import { Button } from "@/components/ui/button";
-import { Loader2, User, Mail, At } from "lucide-react";
+import { Loader2, User, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { signOut } from "@/lib/auth-client";
 import Link from "next/link";
@@ -57,21 +57,17 @@ const ProfileInfo = () => {
             </p>
           )}
 
-          {/* Username (if different) */}
           {user.username && user.displayUsername !== user.username && (
             <p className="text-xs text-slate-500 mb-4" style={{ fontFamily: 'var(--font-jakarta)' }}>
-              <At className="w-3 h-3 inline mr-1" />
-              {user.username}
+            {user.username}
             </p>
           )}
 
-          {/* Email */}
           <div className="flex items-center justify-center gap-2 text-sm text-slate-400 mb-6" style={{ fontFamily: 'var(--font-jakarta)' }}>
             <Mail className="w-4 h-4" />
             {user.email}
           </div>
 
-          {/* Sign Out Button */}
           <Button
             onClick={handleSignOut}
             variant="destructive"
@@ -81,7 +77,6 @@ const ProfileInfo = () => {
           </Button>
         </div>
 
-        {/* Back to Home */}
         <p className="mt-4 text-center text-slate-500 text-xs" style={{ fontFamily: 'var(--font-jakarta)' }}>
           <Link href="/" className="hover:underline">Back to Home</Link>
         </p>
