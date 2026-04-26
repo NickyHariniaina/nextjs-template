@@ -32,9 +32,9 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+        <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">
           Email
         </label>
         <input
@@ -44,18 +44,18 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          className="input-dark w-full rounded-xl px-4 py-3.5 placeholder:text-slate-500"
+          className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <label htmlFor="password" className="block text-sm font-medium text-slate-300">
+        <div className="flex items-center justify-between mb-1.5">
+          <label htmlFor="password" className="block text-xs font-medium text-slate-300">
             Password
           </label>
-          <button type="button" className="text-sm text-slate-400 hover:text-purple-400 transition-colors cursor-pointer">
+          <button type="button" className="text-xs text-slate-400 hover:text-purple-400 transition-colors cursor-pointer">
             Forgot?
           </button>
         </div>
@@ -67,7 +67,7 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
-          className="input-dark w-full rounded-xl px-4 py-3.5"
+          className="input-dark w-full rounded-lg px-3 py-2.5 text-sm"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="••••••••"
         />
@@ -77,7 +77,7 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
         <motion.p
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-400"
+          className="text-xs text-red-400"
         >
           {error}
         </motion.p>
@@ -86,11 +86,11 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className="btn-gradient w-full flex items-center justify-center py-3.5 rounded-xl font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+        className="btn-gradient w-full flex items-center justify-center py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
         style={{ fontFamily: 'var(--font-jakarta)' }}
       >
         {loading ? (
-          <Loader2 className="w-5 h-5 animate-spin" />
+          <Loader2 className="w-4 h-4 animate-spin" />
         ) : (
           'Sign in'
         )}

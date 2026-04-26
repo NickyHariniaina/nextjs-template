@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-outfit);
-  --font-body: var(--font-jakarta);
+  --font-display: var(--font-raleway);
+  --font-body: var(--font-raleway);
+}
+
+/* in-nova color palette */
+:root {
+  --color-primary: #a089df;
+  --color-secondary: #807be4;
+  --color-accent: #faa178;
+  --color-dark-bg: #181136;
+  --color-dark-bg-2: #1a1a4e;
+  --color-text-light: #c5b5f0;
 }
 
 * {
@@ -10,10 +20,10 @@
 }
 
 body {
-  background: #09090b;
+  background: var(--color-dark-bg);
   color: #fafafa;
-  font-family: var(--font-jakarta);
-  overflow: hidden;
+  font-family: var(--font-raleway);
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
@@ -100,10 +110,10 @@ body {
 }
 
 .input-dark:focus {
-  border-color: #8b5cf6;
-  background: rgba(139, 92, 246, 0.05);
+  border-color: var(--color-primary);
+  background: rgba(160, 137, 223, 0.05);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 0 3px rgba(160, 137, 223, 0.15);
 }
 
 .input-dark::placeholder {
@@ -112,7 +122,7 @@ body {
 
 /* Primary button */
 .btn-gradient {
-  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: white;
   position: relative;
   overflow: hidden;
@@ -123,14 +133,14 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+  background: linear-gradient(135deg, #b89df3 0%, #9589f5 100%);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
 
 .btn-gradient:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
+  box-shadow: 0 8px 25px rgba(160, 137, 223, 0.35);
 }
 
 .btn-gradient:hover::before {
@@ -162,12 +172,12 @@ body {
 }
 
 .btn-social:focus-visible {
-  outline: 2px solid #8b5cf6;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 button:focus-visible {
-  outline: 2px solid #8b5cf6;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -183,6 +193,14 @@ button:focus-visible {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #8b5cf6, #ec4899, #f97316, transparent);
+  background: linear-gradient(90deg, transparent, var(--color-primary), #ec4899, var(--color-accent), transparent);
   opacity: 0.5;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, var(--color-accent), var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

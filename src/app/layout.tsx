@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Raleway } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Hackaton | Auth",
-  description: "Sign in to your account",
+  title: "Hackaton | Interview Platform",
+  description: "Prepare for your dream job with AI-powered interview practice",
 };
 
 export default function RootLayout({
@@ -27,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${plusJakarta.variable}`}>
+    <html lang="en" className={raleway.variable}>
       <body className="antialiased">{children}</body>
     </html>
   );

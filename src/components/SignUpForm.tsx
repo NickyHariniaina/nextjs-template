@@ -37,9 +37,9 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+        <label htmlFor="name" className="block text-xs font-medium text-slate-300 mb-1.5">
           Full Name
         </label>
         <input
@@ -49,14 +49,14 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={loading}
-          className="input-dark w-full rounded-xl px-4 py-3.5 placeholder:text-slate-500"
+          className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="John Doe"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+        <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">
           Email
         </label>
         <input
@@ -66,14 +66,14 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={loading}
-          className="input-dark w-full rounded-xl px-4 py-3.5 placeholder:text-slate-500"
+          className="input-dark w-full rounded-lg px-3 py-2.5 text-sm placeholder:text-slate-500"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+        <label htmlFor="password" className="block text-xs font-medium text-slate-300 mb-1.5">
           Password
         </label>
         <input
@@ -84,7 +84,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={loading}
-          className="input-dark w-full rounded-xl px-4 py-3.5"
+          className="input-dark w-full rounded-lg px-3 py-2.5 text-sm"
           style={{ fontFamily: 'var(--font-jakarta)' }}
           placeholder="Min. 6 characters"
         />
@@ -94,7 +94,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         <motion.p
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-400"
+          className="text-xs text-red-400"
         >
           {error}
         </motion.p>
@@ -103,11 +103,11 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className="btn-gradient w-full flex items-center justify-center py-3.5 rounded-xl font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
+        className="btn-gradient w-full flex items-center justify-center py-2.5 rounded-lg font-medium text-sm cursor-pointer disabled:cursor-not-allowed"
         style={{ fontFamily: 'var(--font-jakarta)' }}
       >
         {loading ? (
-          <Loader2 className="w-5 h-5 animate-spin" />
+          <Loader2 className="w-4 h-4 animate-spin" />
         ) : (
           'Create account'
         )}
