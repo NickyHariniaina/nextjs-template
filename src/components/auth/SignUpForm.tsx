@@ -59,11 +59,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           onSuccess: () => {
             toast.success("Account created successfully");
             
-            if (onSuccess) {
-              onSuccess();
-            } else {
               router.push("/profile");
-            }
           },
         },
       });

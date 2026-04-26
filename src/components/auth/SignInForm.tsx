@@ -55,12 +55,7 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           },
           onSuccess: () => {
             toast.success("Signed in successfully");
-            
-            if (onSuccess) {
-              onSuccess();
-            } else {
               handleSuccess();
-            }
           },
         },
       });
