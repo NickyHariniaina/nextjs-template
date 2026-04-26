@@ -12,10 +12,13 @@ import { useUserStore } from "@/store/useUserStore";
 import { getImageUrlAction } from "@/app/actions/get-image-url.action";
 import { removeImageUrlAction } from "@/app/actions/remove-image-url.action";
 import { getFallbackAvatarUrlAction } from "@/app/actions/get-fallback-avatar-url.action";
+import { useRouter } from "next/navigation";
 
 const UpdateProfilePanel = () => {
   const { user, isLoadingUser } = useUserStore();
   const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
+
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -89,7 +92,7 @@ const UpdateProfilePanel = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center bg-gradient-to-br from-indigo-50 to-rose-50">
+    <div className="min-h-screen p-6 flex items-center justify-center">
       <div className="w-full max-w-4xl">
         <h1 className="text-3xl font-bold text-center mb-2 text-slate-800">
           Account Settings
@@ -97,6 +100,7 @@ const UpdateProfilePanel = () => {
         <p className="text-center text-slate-600 mb-8">
           Manage your profile and account preferences
         </p>
+        <Button onClick={()=>router.push("/profile")}>Return to profile</Button>
 
         <div className="flex flex-col items-center mb-8">
           <div className="relative group bg-lime- h-28">

@@ -10,7 +10,9 @@ import { useUserStore } from "@/store/useUserStore";
 import { Button } from "../ui/button";
 import { updateProfileInfoSchema, UpdateProfileInfoSchema } from "@/lib/validation/profile";
 
+
 const UpdateInfoForm = () => {
+
   const { user, isLoadingUser } = useUserStore();
   const [isPending, setIsPending] = useState(false);
 
