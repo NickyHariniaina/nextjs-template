@@ -18,7 +18,7 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   const [loading, setLoading] = useState(false);
 
   const handleSuccess = () => {
-    window.location.href = '/home';
+    window.location.href = '/profile';
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

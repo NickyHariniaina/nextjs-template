@@ -16,7 +16,7 @@ export const SocialButtons = () => {
     try {
       await signIn.social({
         provider,
-        callbackURL: '/home',
+        callbackURL: '/profile',
       });
     } catch {
       toast.error(`${provider} sign in failed`);

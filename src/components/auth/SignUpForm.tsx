@@ -22,7 +22,6 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
     e.preventDefault();
     setError(null);
 
-    // Validate with zod
     const result = registerSchema.safeParse({ firstName: name.split(' ')[0], lastName: name.split(' ')[1] || '', email, password });
     if (!result.success) {
       setError(result.error.issues[0].message);
@@ -40,7 +39,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
       if (onSuccess) {
         onSuccess();
       } else {
-        window.location.href = '/home';
+        window.location.href = '/profile';
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Registration failed';
