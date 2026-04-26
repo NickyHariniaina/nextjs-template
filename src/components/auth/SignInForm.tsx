@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { signIn } from '@/lib/auth/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { SocialButtons } from './SocialButtons';
+import { emailLoginSchema } from '@/lib/validation/auth';
 
 interface SignInFormProps {
   onSuccess?: () => void;
@@ -22,6 +24,14 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Validate with zod
+    const result = emailLoginSchema.safeParse({ email, password });
+    if (!result.success) {
+      setError(result.error.issues[0].message);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -90,6 +100,8 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           {error}
         </motion.p>
       )}
+
+      <SocialButtons />
 
       <button
         type="submit"

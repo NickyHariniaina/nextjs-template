@@ -5,6 +5,7 @@ import { signUp } from '@/lib/auth/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SocialButtons } from './SocialButtons';
+import { registerSchema } from '@/lib/validation/auth';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -20,6 +21,14 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Validate with zod
+    const result = registerSchema.safeParse({ firstName: name.split(' ')[0], lastName: name.split(' ')[1] || '', email, password });
+    if (!result.success) {
+      setError(result.error.issues[0].message);
+      return;
+    }
+
     setLoading(true);
 
     try {
