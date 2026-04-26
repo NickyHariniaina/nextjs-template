@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { SocialButtons } from './SocialButtons';
 
 interface SignInFormProps {
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export const SignInForm = ({ onSuccess }: SignInFormProps) => {
@@ -15,6 +16,10 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const handleSuccess = () => {
+    window.location.href = '/home';
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -22,7 +27,11 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
 
     try {
       await authClient.signIn.email({ email, password });
-      onSuccess();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        handleSuccess();
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Invalid credentials';
       setError(message);
@@ -82,6 +91,8 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
           {error}
         </motion.p>
       )}
+
+      <SocialButtons />
 
       <button
         type="submit"

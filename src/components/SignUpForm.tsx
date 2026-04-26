@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { SocialButtons } from './SocialButtons';
 
 interface SignUpFormProps {
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
@@ -27,7 +28,11 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         password, 
         name: name || email.split('@')[0] 
       });
-      onSuccess();
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        window.location.href = '/home';
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Registration failed';
       setError(message);
@@ -99,6 +104,8 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
           {error}
         </motion.p>
       )}
+
+      <SocialButtons />
 
       <button
         type="submit"
