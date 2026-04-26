@@ -5,13 +5,13 @@
   --font-body: var(--font-raleway);
 }
 
-/* in-nova color palette */
+/* Darker color palette */
 :root {
   --color-primary: #a089df;
   --color-secondary: #807be4;
   --color-accent: #faa178;
-  --color-dark-bg: #181136;
-  --color-dark-bg-2: #1a1a4e;
+  --color-dark-bg: #0d0a1e;
+  --color-dark-bg-2: #15122e;
   --color-text-light: #c5b5f0;
 }
 

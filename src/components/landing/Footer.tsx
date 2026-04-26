@@ -2,7 +2,7 @@
 
 const COLORS = {
   primary: '#a089df',
-  darkBg2: '#1a1a4e',
+  darkBg2: '#15122e',
 };
 
 const footerLinks = [
@@ -25,14 +25,14 @@ export function Footer() {
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
               </svg>
             </div>
-            <span className="text-sm text-slate-400">© 2025 Hacker. All rights reserved.</span>
+            <span className="text-sm text-slate-600">© 2025 Hacker. All rights reserved.</span>
           </div>
           <div className="flex gap-6">
             {footerLinks.map((link) => (
               <a 
                 key={link.label}
                 href={link.href} 
-                className="text-sm text-slate-500 hover:text-white transition-colors duration-200"
+                className="text-sm text-slate-600 hover:text-white transition-colors duration-200"
               >
                 {link.label}
               </a>

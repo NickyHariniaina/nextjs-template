@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const COLORS = {
   primary: '#a089df',
-  darkBg: '#181136',
+  darkBg2: '#15122e',
 };
 
 const stepsData = [
@@ -14,26 +14,9 @@ const stepsData = [
   { step: '04', title: 'Progress', description: 'Find your job.' },
 ];
 
-interface HowItWorksProps {
-  lang: 'en' | 'fr';
-}
-
-const translations = {
-  en: { 
-    title: 'A Simple Journey, Guided by AI', 
-    subtitle: 'In a few steps, access personalized support.' 
-  },
-  fr: { 
-    title: 'Un parcours simple, guidé par l\'IA', 
-    subtitle: 'En quelques étapes.' 
-  },
-};
-
-export function HowItWorks({ lang }: HowItWorksProps) {
-  const t = translations[lang];
-
+export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-32 px-6" style={{ background: '#1a1a4e' }}>
+    <section id="how-it-works" className="py-32 px-6" style={{ background: COLORS.darkBg2 }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -41,8 +24,8 @@ export function HowItWorks({ lang }: HowItWorksProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t.title}</h2>
-          <p className="text-slate-400 text-lg">{t.subtitle}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">A Simple Journey, Guided by AI</h2>
+          <p className="text-slate-400 text-lg">In a few steps, access personalized support.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-4 gap-6">
@@ -57,20 +40,14 @@ export function HowItWorks({ lang }: HowItWorksProps) {
             >
               <div 
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full flex items-center justify-center mb-4" 
-                style={{ background: `${COLORS.primary}20` }}
+                style={{ background: `${COLORS.primary}15` }}
               >
                 <span className="text-2xl font-bold" style={{ color: COLORS.primary }}>{s.step}</span>
               </div>
               <div className="pt-20">
                 <h3 className="text-lg font-semibold text-white mb-2">{s.title}</h3>
-                <p className="text-sm text-slate-400">{s.description}</p>
+                <p className="text-sm text-slate-500">{s.description}</p>
               </div>
-              {i < stepsData.length - 1 && (
-                <div 
-                  className="hidden md:block absolute top-8 left-[60%] w-[80%] h-px" 
-                  style={{ background: `linear-gradient(90deg, ${COLORS.primary}30, transparent)` }} 
-                />
-              )}
             </motion.div>
           ))}
         </div>

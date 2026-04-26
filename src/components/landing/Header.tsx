@@ -6,16 +6,10 @@ const COLORS = {
   primary: '#a089df',
 };
 
-interface HeaderProps {
-  lang: 'en' | 'fr';
-  onLangChange: () => void;
-}
-
-export function Header({ lang, onLangChange }: HeaderProps) {
+export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <div 
             className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -28,24 +22,13 @@ export function Header({ lang, onLangChange }: HeaderProps) {
           <span className="text-lg font-semibold text-white">Hacker</span>
         </Link>
 
-        {/* Minimal nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="#features" className="text-sm text-slate-400 hover:text-white transition-colors">
+        <nav className="flex items-center gap-6">
+          <Link href="#features" className="text-sm text-slate-500 hover:text-white transition-colors">
             Features
           </Link>
-          <Link href="#contact" className="text-sm text-slate-400 hover:text-white transition-colors">
+          <Link href="#contact" className="text-sm text-slate-500 hover:text-white transition-colors">
             Contact
           </Link>
-        </nav>
-
-        {/* Right side */}
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={onLangChange}
-            className="text-xs text-slate-500 hover:text-white transition-colors"
-          >
-            {lang === 'en' ? 'FR' : 'EN'}
-          </button>
           <Link 
             href="/auth" 
             className="text-sm font-medium text-white px-4 py-2 rounded-lg transition-all hover:opacity-80"
@@ -53,7 +36,7 @@ export function Header({ lang, onLangChange }: HeaderProps) {
           >
             Sign in
           </Link>
-        </div>
+        </nav>
       </div>
     </header>
   );
