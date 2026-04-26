@@ -1,10 +1,10 @@
-import UpdateProfilePanel from "@/components/profile/update-profile-panel";
+import ProfileInfo from "@/components/profile/profile-info";
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-const ProfileSettingPage = async () => {
-  const session = auth.api.getSession({
+const ProfilePage = async () => {
+  const session = await auth.api.getSession({
     headers: await headers(),
   });
 
@@ -13,9 +13,9 @@ const ProfileSettingPage = async () => {
   }
 
   return (
-    <>
-      <UpdateProfilePanel />
-    </>
+    <div className="flex flex-col w-full items-center justify-between space-y-4">
+      <ProfileInfo />
+    </div>
   );
 };
-export default ProfileSettingPage;
+export default ProfilePage;

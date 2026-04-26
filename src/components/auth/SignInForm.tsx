@@ -25,7 +25,6 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
     e.preventDefault();
     setError(null);
 
-    // Validate with zod
     const result = emailLoginSchema.safeParse({ email, password });
     if (!result.success) {
       setError(result.error.issues[0].message);
