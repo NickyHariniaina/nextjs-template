@@ -8,10 +8,10 @@ import { updateUser } from "@/lib/auth/auth-client";
 import { SiCachet, SiUphold } from "react-icons/si";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { useUserStore } from "@/store/useUserStore";
 import { getImageUrlAction } from "@/app/actions/get-image-url.action";
 import { removeImageUrlAction } from "@/app/actions/remove-image-url.action";
 import { getFallbackAvatarUrlAction } from "@/app/actions/get-fallback-avatar-url.action";
-import { useUserStore } from "@/store/useUserStore";
 
 const UpdateProfilePanel = () => {
   const { user, isLoadingUser } = useUserStore();
