@@ -1,21 +1,25 @@
-import ProfileInfo from "@/components/profile/profile-info";
-import { auth } from "@/lib/auth/auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import {
+  ProfileHeader,
+  AboutCard,
+  StatsCard,
+  ProfileSkills,
+  ProfileActivity,
+  ProfileActions,
+} from "@/components/profile";
 
-const ProfilePage = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    redirect("/auth");
-  }
-
+export default function ProfilePage() {
   return (
-    <div className="flex flex-col w-full items-center justify-between space-y-4">
-      <ProfileInfo />
+    <div className="min-h-screen w-full max-w-4xl mx-auto p-6 flex flex-col gap-6">
+      <ProfileHeader />
+      
+      <div className="grid md:grid-cols-2 gap-6">
+        <AboutCard />
+        <StatsCard />
+      </div>
+      
+      <ProfileSkills />
+      <ProfileActivity />
+      <ProfileActions />
     </div>
   );
-};
-export default ProfilePage;
+}
