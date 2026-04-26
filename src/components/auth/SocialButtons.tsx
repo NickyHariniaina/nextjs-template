@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export const SocialButtons = () => {
   const [loading, setLoading] = useState<string | null>(null);
@@ -14,8 +16,8 @@ export const SocialButtons = () => {
         provider,
         callbackURL: '/home',
       });
-    } catch (err) {
-      console.error(`${provider} sign in failed:`, err);
+    } catch {
+      toast.error(`${provider} sign in failed`);
       setLoading(null);
     }
   };
@@ -28,14 +30,14 @@ export const SocialButtons = () => {
       </span>
       
       <div className="flex gap-2 mt-4 w-full">
-        <button
-          type="button"
+        <Button
+          variant="outline"
           onClick={() => handleSocialSignIn('google')}
           disabled={!!loading}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg border border-slate-700/50 bg-slate-800/30 hover:bg-slate-800/60 transition-colors cursor-pointer disabled:opacity-50"
+          className="flex-1 flex items-center justify-center gap-2"
         >
           {loading === 'google' ? (
-            <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+            <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -44,24 +46,24 @@ export const SocialButtons = () => {
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
           )}
-          <span className="text-sm text-slate-300">Google</span>
-        </button>
+          <span className="text-sm">Google</span>
+        </Button>
         
-        <button
-          type="button"
+        <Button
+          variant="outline"
           onClick={() => handleSocialSignIn('github')}
           disabled={!!loading}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg border border-slate-700/50 bg-slate-800/30 hover:bg-slate-800/60 transition-colors cursor-pointer disabled:opacity-50"
+          className="flex-1 flex items-center justify-center gap-2"
         >
           {loading === 'github' ? (
-            <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+            <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
-            <svg className="w-5 h-5 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.24-1.02-.605-.015.015.615.19 1.605.815 1.83 1.185 1.44 1.665.825 2.265-.42.42-1.44.645-2.085.54-1.56-.48-2.205-1.515-2.205-2.805 0-.855.6-1.53 1.425-1.995-.135-.3-.615-.855.015-1.845 0 0 1.17-.375 3.825 1.53 1.11-.33 2.295-.495 3.465-.495 1.17 0 2.355.165 3.465.495 2.655-1.905 3.825-1.53 3.825-1.53.63.99.15 1.545.015 1.845.825.465 1.425 1.14 1.425 1.995 0 1.305-.66 2.34-2.22 2.82.96.48 1.41 1.26 1.41 2.25 0 1.665-.015 3.015-.015 3.435 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
             </svg>
           )}
-          <span className="text-sm text-slate-300">GitHub</span>
-        </button>
+          <span className="text-sm">GitHub</span>
+        </Button>
       </div>
     </div>
   );

@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SignInForm } from '@/components/SignInForm';
-import { SignUpForm } from '@/components/SignUpForm';
-import { SocialButtons } from '@/components/SocialButtons';
+import { SignInForm } from '@/components/auth/SignInForm';
+import { SignUpForm } from '@/components/auth/SignUpForm';
+import { SocialButtons } from '@/components/auth/SocialButtons';
 import Link from 'next/link';
 
 const COLORS = {
