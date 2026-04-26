@@ -4,6 +4,16 @@ import { useSession } from "@/lib/auth/auth-client";
 import { useUserStore } from "@/store/useUserStore";
 import { useEffect } from "react";
 
+interface SessionUser {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+  emailVerified: boolean;
+  username?: string | null;
+  displayUsername?: string | null;
+}
+
 const ProfileInitializer = () => {
   const { data: session, isPending } = useSession();
   const setUser = useUserStore((state) => state.setUser);
@@ -14,15 +24,17 @@ const ProfileInitializer = () => {
 
     if (!session?.user) return;
 
+    const user = session.user as SessionUser;
+    
     setUser({
-      id: session.user.id,
-      firstName: session.user.name.split(" ")[0],
-      lastName: session.user.name.split(" ")[1],
-      email: session.user.email,
-      image: session.user.image,
-      emailVerified: session.user.emailVerified,
-      username: session.user.username,
-      displayUsername: session.user.displayUsername,
+      id: user.id,
+      firstName: user.name.split(" ")[0],
+      lastName: user.name.split(" ")[1],
+      email: user.email,
+      image: user.image,
+      emailVerified: user.emailVerified,
+      username: user.username,
+      displayUsername: user.displayUsername,
     });
   }, [session?.user, isPending, setUser, setIsLoadingUser]);
 
