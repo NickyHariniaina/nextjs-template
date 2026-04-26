@@ -77,7 +77,7 @@ const UpdateInfoForm = () => {
   if (!user || isLoadingUser) return <div>Loading...</div>;
 
   return (
-    <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+    <form className="space-y-6 bg-black" onSubmit={form.handleSubmit(onSubmit)}>
       <Controller
         control={form.control}
         name="firstName"

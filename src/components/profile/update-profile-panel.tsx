@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import UpdateInfoForm from "./update-info-form";
 import { toast } from "sonner";
 import { updateUser } from "@/lib/auth/auth-client";
-import { SiCachet, SiUphold } from "react-icons/si";
+import { SiCachet } from "react-icons/si";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/store/useUserStore";
@@ -117,9 +117,8 @@ const UpdateProfilePanel = () => {
           <Button
             onClick={() => inputRef.current?.click()}
             disabled={isPending}
-            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md hover:shadow-lg transition-shadow"
+            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-purple-500 to-pink-500 text-white shadow-md hover:shadow-lg transition-shadow"
           >
-            <SiUphold className="w-6 h-6 mr-2" />
             <span>Change Avatar</span>
             <Input
               ref={inputRef}
@@ -133,9 +132,8 @@ const UpdateProfilePanel = () => {
           <Button
             onClick={handlePicDeletion}
             disabled={isPending}
-            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md hover:shadow-lg transition-shadow"
+            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-blue-500 to-cyan-500 text-white shadow-md hover:shadow-lg transition-shadow"
           >
-            <SiUphold className="w-6 h-6 mr-2" />
             <span>Remove Avatar</span>
           </Button>
         </div>
