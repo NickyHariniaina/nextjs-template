@@ -13,12 +13,8 @@ const ProfileSettingPage = async () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="aurora" />
-      <div className="noise" />
-      <div className="relative z-10">
-        <UpdateProfilePanel />
-      </div>
+    <div className="min-h-screen">
+      <UpdateProfilePanel />
     </div>
   );
 };
