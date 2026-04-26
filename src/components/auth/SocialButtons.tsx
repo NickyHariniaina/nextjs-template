@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { SiGithub, SiGoogle } from "react-icons/si";
 import {} from "lucide-react"
-import { signIn } from '@/lib/auth-client';
+import { signIn } from '@/lib/auth/auth-client';
 
 export const SocialButtons = () => {
   const [loading, setLoading] = useState<string | null>(null);

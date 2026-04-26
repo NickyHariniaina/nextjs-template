@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from '@/lib/auth-client';
+import { signIn } from '@/lib/auth/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 

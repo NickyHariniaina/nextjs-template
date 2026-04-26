@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth/auth-client";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { useState } from "react";

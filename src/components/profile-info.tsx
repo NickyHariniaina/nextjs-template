@@ -4,7 +4,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { Button } from "@/components/ui/button";
 import { Loader2, User, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { signOut } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth/auth-client";
 import Link from "next/link";
 
 const ProfileInfo = () => {
