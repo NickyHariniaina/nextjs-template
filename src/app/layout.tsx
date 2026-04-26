@@ -3,6 +3,7 @@ import { Raleway } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
+import ProfileInitializer from "@/components/profile-initializer";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={raleway.variable}>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+             <ProfileInitializer />
           {children}
         </ThemeProvider>
         <Toaster />
