@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { signUp } from '@/lib/auth/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { SocialButtons } from './SocialButtons';
 import { registerSchema } from '@/lib/validation/auth';
 
 interface SignUpFormProps {
@@ -113,7 +112,6 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
         </motion.p>
       )}
 
-      <SocialButtons />
 
       <button
         type="submit"
