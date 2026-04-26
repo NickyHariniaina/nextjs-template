@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
+import { signIn } from '@/lib/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -25,7 +25,7 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
     setLoading(true);
 
     try {
-      await authClient.signIn.email({ email, password });
+      await signIn.email({ email, password });
       if (onSuccess) {
         onSuccess();
       } else {

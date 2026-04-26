@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
+import { signUp } from '@/lib/auth-client';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SocialButtons } from './SocialButtons';
@@ -23,7 +23,7 @@ export const SignUpForm = ({ onSuccess }: SignUpFormProps) => {
     setLoading(true);
 
     try {
-      await authClient.signUp.email({ 
+      await signUp.email({ 
         email, 
         password, 
         name: name || email.split('@')[0] 
