@@ -24,7 +24,7 @@ export const registerSchema = z.object({
 
   email: z
     .string()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: "Invalid email address" }),
+    .email("Invalid email address"),
 
   password: z
     .string()
@@ -44,7 +44,7 @@ export const registerBetterAuthSchema = z.object({
 
   email: z
     .string()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: "Invalid email address" }),
+    .email("Invalid email address"),
 
   password: z
     .string()
@@ -54,7 +54,7 @@ export const registerBetterAuthSchema = z.object({
 export const emailLoginSchema = z.object({
   email: z
     .string()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: "Invalid email address" }),
+    .email("Invalid email address"),
   password: z.string().min(1, { message: "Password cannot be empty" }),
 });
 
