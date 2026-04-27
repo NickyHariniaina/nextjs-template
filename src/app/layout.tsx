@@ -24,9 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={raleway.variable}>
-      <body className="antialiased">
+      <body className="antialiased relative">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-             <ProfileInitializer />
+          <div className="aurora" />
+          <div className="noise" />
+          <ProfileInitializer />
           {children}
         </ThemeProvider>
         <Toaster />

@@ -1,151 +1,61 @@
 "use client";
-import { useRef, useState } from "react";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
-import UpdateInfoForm from "./update-info-form";
-import { toast } from "sonner";
-import { updateUser } from "@/lib/auth/auth-client";
-import { SiCachet } from "react-icons/si";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
-import { useUserStore } from "@/store/useUserStore";
-import { getImageUrlAction } from "@/app/actions/get-image-url.action";
-import { removeImageUrlAction } from "@/app/actions/remove-image-url.action";
-import { getFallbackAvatarUrlAction } from "@/app/actions/get-fallback-avatar-url.action";
-import { useRouter } from "next/navigation";
 
-const UpdateProfilePanel = () => {
-  const { user, isLoadingUser } = useUserStore();
-  const [isPending, setIsPending] = useState(false);
+import { ArrowLeft, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
+import AvatarUpload from "./avatar-upload";
+import PersonalInfoForm from "./personal-info-form";
+import SecuritySection from "./security-section";
+
+export default function UpdateProfilePanel() {
   const router = useRouter();
 
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  if (isLoadingUser || !user) return <div>Loading...</div>;
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      toast.error("Please select a file");
-      return;
-    }
-    try {
-      setIsPending(true);
-      const result = await getImageUrlAction(file);
-      if (result.error) {
-        toast.error(result.error);
-        return;
-      }
-      const imageUrl = result.url;
-      await updateUser({
-        image: imageUrl,
-        fetchOptions: {
-          onError: (ctx) => {
-            toast.error(ctx.error.message);
-          },
-          onSuccess: () => {
-            toast.success("Profile updated successfully");
-          },
-        },
-      });
-    } catch (err) {
-      console.error(err);
-      toast.error("Something went wrong");
-    } finally {
-      setIsPending(false);
-    }
-  };
-
-  const handlePicDeletion = async () => {
-    try {
-      setIsPending(true);
-
-      const result = await removeImageUrlAction();
-
-      if (result.success) {
-        const fallbackUrl = getFallbackAvatarUrlAction(
-          user.firstName,
-          user.lastName
-        );
-
-        await updateUser({
-          image: fallbackUrl,
-          fetchOptions: {
-            onError: (ctx) => {
-              toast.error(ctx.error.message);
-            },
-            onSuccess: () => {
-              toast.success(result.success);
-            },
-          },
-        });
-      } else {
-        toast.error(result.error);
-      }
-    } catch (err) {
-      console.error("handlePicDeletion failed:", err);
-      toast.error("Something went wrong");
-    } finally {
-      setIsPending(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center">
-      <div className="w-full max-w-4xl">
-        <h1 className="text-3xl font-bold text-center mb-2 text-slate-800">
-          Account Settings
-        </h1>
-        <p className="text-center text-slate-600 mb-8">
-          Manage your profile and account preferences
-        </p>
-        <Button onClick={()=>router.push("/profile")}>Return to profile</Button>
-
-        <div className="flex flex-col items-center mb-8">
-          <div className="relative group bg-lime- h-28">
-            <Avatar className="w-28 h-28 mb-4 border-4 border-white shadow-lg">
-              <AvatarImage src={user.image ?? undefined} />
-            </Avatar>
-            <div
-              onClick={() => inputRef.current?.click()}
-              className={cn(
-                !isPending && "group-hover:opacity-100 cursor-pointer",
-                "absolute w-26 h-26 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-black/40 rounded-full opacity-0  transition-opacity"
-              )}
-            >
-              <SiCachet className="w-6 h-6 text-white" />
+    <div className="min-h-screen w-full max-w-2xl mx-auto px-4 py-8">
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#a089df]/10 via-transparent to-[#faa178]/10 opacity-30 blur-3xl -z-10" />
+        
+        <div className="flex items-center justify-between mb-8">
+          <button
+            onClick={() => router.push("/profile")}
+            className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span>Back</span>
+          </button>
+          
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#a089df] to-[#807be4] flex items-center justify-center">
+              <Settings className="w-5 h-5 text-white" />
+            </div>
+            <h1 className="text-xl font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              Account Settings
+            </h1>
+          </div>
+        </div>
+        
+        <div className="flex flex-col gap-5">
+          <div className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#a089df]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative p-1">
+              <AvatarUpload />
             </div>
           </div>
-
-          <Button
-            onClick={() => inputRef.current?.click()}
-            disabled={isPending}
-            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-purple-500 to-pink-500 text-white shadow-md hover:shadow-lg transition-shadow"
-          >
-            <span>Change Avatar</span>
-            <Input
-              ref={inputRef}
-              type="file"
-              className="hidden"
-              onChange={handleFileChange}
-              accept="image/*"
-            />
-          </Button>
-
-          <Button
-            onClick={handlePicDeletion}
-            disabled={isPending}
-            className="flex mt-3 items-center justify-center px-4 py-2 rounded-md bg-blue-500 to-cyan-500 text-white shadow-md hover:shadow-lg transition-shadow"
-          >
-            <span>Remove Avatar</span>
-          </Button>
+          
+          <div className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#807be4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative p-1">
+              <PersonalInfoForm />
+            </div>
+          </div>
+          
+          <div className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] transition-all duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#faa178]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative p-1">
+              <SecuritySection />
+            </div>
+          </div>
         </div>
-
-        <UpdateInfoForm />
       </div>
     </div>
   );
-};
-
-export default UpdateProfilePanel;
+}

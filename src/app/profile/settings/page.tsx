@@ -13,9 +13,10 @@ const ProfileSettingPage = async () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen">
       <UpdateProfilePanel />
-    </>
+    </div>
   );
 };
+
 export default ProfileSettingPage;
