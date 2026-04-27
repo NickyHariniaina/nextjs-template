@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth Page Wireframe – Facebook-Inspired Centered Card</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+      background: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 48px;
+    }
+
+    /* --- Wireframe Header --- */
+    .wf-header {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 6px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+    }
+    .wf-header h1 { font-size: 18px; color: #000; margin-bottom: 4px; }
+    .wf-header p  { font-size: 12px; color: #666; line-height: 1.5; }
+    .wf-header .legend { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: bold; color: #fff; }
+    .badge-reuse { background: #4CAF50; }
+    .badge-new   { background: #FF9800; }
+
+    /* --- Device Frame --- */
+    .device-wrapper {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 700px) { .device-wrapper { grid-template-columns: 1fr; } }
+
+    .device-label {
+      font-size: 12px;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    /* Desktop frame */
+    .frame-desktop {
+      border: 3px solid #333;
+      border-radius: 8px;
+      background: #e8e8e8;
+      overflow: hidden;
+    }
+    .frame-desktop .browser-bar {
+      background: #ccc;
+      border-bottom: 2px solid #999;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+    }
+    .frame-desktop .browser-bar .dot {
+      width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #888; background: #ddd;
+    }
+    .frame-desktop .screen {
+      background: #f5f5f5;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    /* Mobile frame */
+    .frame-mobile {
+      border: 4px solid #333;
+      border-radius: 20px;
+      background: #ddd;
+      overflow: hidden;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .frame-mobile .phone-notch {
+      background: #333;
+      height: 22px;
+      border-radius: 0 0 12px 12px;
+      width: 60%;
+      margin: 0 auto;
+    }
+    .frame-mobile .screen {
+      background: #f5f5f5;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    /* --- Auth Card & Components --- */
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 32px 28px;
+      position: relative;
+    }
+
+    .auth-card-mobile {
+      width: 100%;
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 20px 16px;
+      position: relative;
+    }
+
+    /* Brand */
+    .brand-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo-box {
+      width: 48px; height: 48px;
+      border: 2px solid #333;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: bold;
+      background: #e0e0e0;
+      margin-bottom: 8px;
+    }
+    .brand-tagline { font-size: 12px; color: #666; text-align: center; max-width: 240px; }
+
+    /* Tabs (Sign In / Sign Up) */
+    .auth-tabs {
+      display: flex;
+      border: 2px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .auth-tab {
+      flex: 1; padding: 10px;
+      text-align: center; font-size: 13px; font-weight: bold;
+      border: none; background: #f0f0f0; color: #666; cursor: pointer;
+    }
+    .auth-tab.active { background: #333; color: #fff; }
+    .auth-tab + .auth-tab { border-left: 2px solid #333; }
+
+    /* Social buttons */
+    .social-btn-row { display: flex; gap: 10px; margin-bottom: 16px; }
+    .social-btn {
+      flex: 1; padding: 11px 8px;
+      border: 2px solid #333; border-radius: 8px;
+      background: #f5f5f5; font-size: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer;
+      position: relative;
+    }
+    .social-icon-box {
+      width: 18px; height: 18px;
+      background: #ccc; border: 1.5px solid #999; border-radius: 3px;
+      font-size: 9px; display: flex; align-items: center; justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 16px 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: #ccc; border: none; }
+    .divider-text { font-size: 11px; color: #999; text-transform: uppercase; }
+
+    /* Floating label input */
+    .floating-field {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .floating-label {
+      position: absolute; top: -8px; left: 12px;
+      background: #fff; padding: 0 4px;
+      font-size: 11px; color: #555;
+    }
+    .floating-input {
+      width: 100%; padding: 12px 14px;
+      border: 2px solid #999; border-radius: 8px;
+      background: #fafafa; font-size: 13px;
+      font-family: inherit;
+    }
+    .floating-input.focused { border-color: #333; }
+
+    .input-row { display: flex; align-items: center; }
+    .input-suffix { margin-left: -36px; font-size: 16px; cursor: pointer; color: #888; }
+
+    /* Password strength */
+    .strength-bar {
+      margin-top: 6px; display: flex; gap: 4px; height: 4px;
+    }
+    .strength-segment {
+      flex: 1; border: 1.5px solid #ccc; border-radius: 2px;
+    }
+    .strength-segment.filled { background: #aaa; border-color: #aaa; }
+    .strength-label { font-size: 10px; color: #888; margin-top: 2px; }
+
+    /* Forgot link */
+    .forgot-row {
+      display: flex; justify-content: flex-end;
+      margin-top: -10px; margin-bottom: 16px;
+    }
+    .forgot-link { font-size: 11px; color: #555; text-decoration: underline; cursor: pointer; }
+
+    /* Submit button */
+    .submit-btn {
+      width: 100%; padding: 13px;
+      background: #333; color: #fff;
+      border: 2px solid #333; border-radius: 8px;
+      font-size: 14px; font-weight: bold;
+      cursor: pointer; margin-bottom: 8px;
+      font-family: inherit;
+    }
+
+    /* Toggle */
+    .toggle-row {
+      text-align: center; font-size: 12px; color: #666; margin-top: 16px;
+    }
+    .toggle-link { color: #333; font-weight: bold; text-decoration: underline; cursor: pointer; }
+
+    /* Terms */
+    .terms-row {
+      text-align: center; font-size: 10px; color: #aaa; margin-top: 12px;
+    }
+    .terms-link { text-decoration: underline; color: #888; }
+
+    /* Social proof */
+    .social-proof {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .avatar-stack { display: flex; }
+    .avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #ccc; border: 2px solid #f5f5f5;
+      margin-left: -8px; font-size: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; color: #555;
+    }
+    .avatar:first-child { margin-left: 0; }
+    .proof-text { font-size: 11px; color: #777; }
+
+    /* Component badge helper */
+    .comp-wrap { position: relative; }
+    .comp-badge {
+      position: absolute; top: -10px; right: 0;
+      padding: 2px 6px; border-radius: 3px;
+      font-size: 9px; font-weight: bold;
+      color: #fff; z-index: 10;
+      font-family: Arial, sans-serif;
+      white-space: nowrap;
+    }
+    .comp-badge.reuse { background: #4CAF50; }
+    .comp-badge.new   { background: #FF9800; }
+
+    /* annotation */
+    .annotation {
+      font-size: 11px; color: #999; font-style: italic; margin-top: 6px;
+    }
+
+    /* Section headings */
+    .section-title {
+      font-size: 14px; font-weight: bold; color: #333;
+      margin: 24px 0 8px; border-bottom: 2px dashed #ccc; padding-bottom: 4px;
+    }
+
+    /* Responsive note box */
+    .note-box {
+      background: #fff; border: 2px dashed #999;
+      border-radius: 6px; padding: 12px 16px;
+      font-size: 12px; color: #555;
+      margin-bottom: 20px; width: 100%; max-width: 900px;
+    }
+    .note-box strong { color: #333; }
+  </style>
+</head>
+<body>
+
+  <!-- ====================== HEADER ====================== -->
+  <div class="wf-header">
+    <h1>Auth Page Wireframe — Facebook-Inspired Centered Card</h1>
+    <p>
+      Redesign inspired by Facebook/Meta's clean, centered auth approach: social auth first, clear tab navigation between
+      sign-in and sign-up, floating-label inputs, password visibility toggle, strength indicator, and a prominent terms link.
+      Removes the decorative split-panel in favor of a focused, conversion-optimized single-column layout.
+    </p>
+    <div class="legend">
+      <span><span class="badge badge-reuse">[REUSE]</span> Existing component in codebase</span>
+      <span><span class="badge badge-new">[NEW]</span> New component to create</span>
+    </div>
+  </div>
+
+  <!-- ====================== KEY CHANGES NOTE ====================== -->
+  <div class="note-box">
+    <strong>Key differences from current design:</strong>
+    <ol style="margin-left: 18px; margin-top: 6px; line-height: 1.8;">
+      <li>Centered card replaces split-screen layout → works identically on all screen sizes</li>
+      <li>Sign In / Sign Up as tabs at top of card → no page-level state jump</li>
+      <li>Social auth buttons elevated above email/password form → matches Facebook's hierarchy</li>
+      <li>FloatingLabelInput replaces plain inputs → more accessible, more compact</li>
+      <li>Password visibility toggle + strength indicator added to Sign Up</li>
+      <li>Forgot password as dedicated link with proper affordance</li>
+      <li>Terms of Service as actual anchor link, not plain text</li>
+      <li>Social proof moved above card as trust signal (not buried in decorative panel)</li>
+    </ol>
+  </div>
+
+  <!-- ====================== DEVICE FRAMES ====================== -->
+  <div class="device-wrapper">
+
+    <!-- ====== DESKTOP ====== -->
+    <div>
+      <div class="device-label">🖥 Desktop (≥ 1024px)</div>
+      <div class="frame-desktop">
+        <div class="browser-bar">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div style="flex:1; background:#e0e0e0; border-radius:4px; height:16px; margin-left:8px;"></div>
+        </div>
+        <div class="screen">
+
+          <!-- Logo -->
+          <div class="brand-logo" style="margin-bottom:12px;">
+            <!-- REUSABLE: Logo mark from src/app/auth/page.tsx (inline) -->
+            <div style="position:relative; display:inline-block;">
+              <span class="comp-badge reuse">[REUSE] LogoMark</span>
+              <div class="logo-box">H</div>
+            </div>
+            <div class="brand-tagline">Build something extraordinary with thousands of developers.</div>
+          </div>
+
+          <!-- Social proof (above card) -->
+          <!-- NEW COMPONENT: SocialProof from src/components/SocialProof.tsx -->
+          <div style="position:relative; margin-bottom:20px;">
+            <span class="comp-badge new" style="top:-12px;">[NEW] SocialProof</span>
+            <div class="social-proof" style="justify-content:center;">
+              <div class="avatar-stack">
+                <div class="avatar">JD</div>
+                <div class="avatar">AS</div>
+                <div class="avatar">MK</div>
+                <div class="avatar">RL</div>
+                <div class="avatar">TW</div>
+              </div>
+              <div class="proof-text">Trusted by <strong>5,000+</strong> developers</div>
+            </div>
+          </div>
+
+          <!-- Auth Card -->
+          <div class="auth-card">
+
+            <!-- Social Buttons -->
+            <!-- NEW COMPONENT: SocialAuthButtons from src/components/SocialAuthButtons.tsx -->
+            <div style="position:relative; margin-bottom:4px;">
+              <span class="comp-badge new">[NEW] SocialAuthButtons</span>
+              <div class="social-btn-row">
+                <button class="social-btn">
+                  <div class="social-icon-box">G</div>
+                  <span>Google</span>
+                </button>
+                <button class="social-btn">
+                  <div class="social-icon-box">GH</div>
+                  <span>GitHub</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider">
+              <hr class="divider-line" /><span class="divider-text">or continue with email</span><hr class="divider-line" />
+            </div>
+
+            <!-- Email field -->
+            <!-- REUSABLE: FloatingLabelInput from src/components/ui/floating-label-input.tsx -->
+            <div class="comp-wrap" style="margin-bottom:16px;">
+              <span class="comp-badge reuse" style="top:-12px;">[REUSE] FloatingLabelInput</span>
+              <div class="floating-field" style="margin-bottom:0;">
+                <span class="floating-label">Email address</span>
+                <input class="floating-input focused" type="email" value="you@example.com" readonly />
+              </div>
+            </div>
+
+            <!-- Password field with toggle -->
+            <!-- REUSABLE: FloatingLabelInput from src/components/ui/floating-label-input.tsx -->
+            <div class="comp-wrap" style="margin-bottom:4px;">
+              <span class="comp-badge reuse" style="top:-12px;">[REUSE] FloatingLabelInput</span>
+              <div class="floating-field" style="margin-bottom:0;">
+                <span class="floating-label">Password</span>
+                <div class="input-row">
+                  <input class="floating-input" type="password" value="••••••••" readonly style="padding-right:40px;" />
+                  <!-- NEW: PasswordToggle icon button -->
+                  <span class="input-suffix" title="Show/hide password">👁</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Forgot password -->
+            <div class="forgot-row">
+              <a class="forgot-link">Forgot password?</a>
+            </div>
+
+            <!-- Submit button -->
+            <!-- REUSABLE: btn-gradient style from globals.css -->
+            <div style="position:relative; margin-bottom:4px;">
+              <span class="comp-badge reuse" style="top:-10px;">[REUSE] btn-gradient (.globals.css)</span>
+              <button class="submit-btn">Sign in →</button>
+            </div>
+
+            <!-- Toggle -->
+            <div class="toggle-row">
+              Don't have an account? <a class="toggle-link">Sign up</a>
+            </div>
+
+            <!-- Terms -->
+            <div class="terms-row">
+              By continuing you agree to our
+              <a class="terms-link">Terms of Service</a> and
+              <a class="terms-link">Privacy Policy</a>
+            </div>
+
+          </div><!-- /auth-card -->
+
+        </div><!-- /screen -->
+      </div><!-- /frame-desktop -->
+    </div>
+
+    <!-- ====== MOBILE ====== -->
+    <div>
+      <div class="device-label">📱 Mobile (&lt; 768px)</div>
+      <div class="frame-mobile">
+        <div class="phone-notch"></div>
+        <div class="screen">
+
+          <!-- Logo (centered) -->
+          <div class="brand-logo" style="margin-bottom:10px; margin-top:8px;">
+            <div class="logo-box" style="width:40px; height:40px; font-size:18px;">H</div>
+          </div>
+
+          <!-- Auth Card (full-width, no outer padding) -->
+          <div class="auth-card-mobile">
+
+            <!-- Social buttons -->
+            <div class="social-btn-row" style="gap:8px; margin-bottom:12px;">
+              <button class="social-btn" style="padding:9px 6px; font-size:11px;">
+                <div class="social-icon-box">G</div><span>Google</span>
+              </button>
+              <button class="social-btn" style="padding:9px 6px; font-size:11px;">
+                <div class="social-icon-box">GH</div><span>GitHub</span>
+              </button>
+            </div>
+
+            <div class="divider" style="margin:12px 0;">
+              <hr class="divider-line" /><span class="divider-text" style="font-size:10px;">or email</span><hr class="divider-line" />
+            </div>
+
+            <!-- Email -->
+            <div class="floating-field">
+              <span class="floating-label">Email</span>
+              <input class="floating-input focused" type="email" value="you@example.com" readonly style="font-size:12px; padding:10px 12px;" />
+            </div>
+
+            <!-- Password -->
+            <div class="floating-field">
+              <span class="floating-label">Password</span>
+              <div class="input-row">
+                <input class="floating-input" type="password" value="••••••" readonly style="font-size:12px; padding:10px 12px; padding-right:36px;" />
+                <span class="input-suffix" style="font-size:14px;">👁</span>
+              </div>
+            </div>
+
+            <div class="forgot-row" style="margin-top:-8px; margin-bottom:12px;">
+              <a class="forgot-link" style="font-size:10px;">Forgot password?</a>
+            </div>
+
+            <button class="submit-btn" style="padding:11px; font-size:13px; margin-bottom:6px;">Sign in →</button>
+
+            <div class="toggle-row" style="font-size:11px;">
+              Don't have an account? <a class="toggle-link">Sign up</a>
+            </div>
+            <div class="terms-row" style="margin-top:8px; font-size:9px;">
+              By continuing you agree to our <a class="terms-link">Terms</a> &amp; <a class="terms-link">Privacy</a>
+            </div>
+          </div>
+
+          <!-- Social proof (below card on mobile) -->
+          <div class="social-proof" style="justify-content:center; margin-top:16px;">
+            <div class="avatar-stack">
+              <div class="avatar">JD</div>
+              <div class="avatar">AS</div>
+              <div class="avatar">MK</div>
+            </div>
+            <div class="proof-text" style="font-size:10px;"><strong>5,000+</strong> developers</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /device-wrapper -->
+
+  <!-- ====================== SIGN UP VARIANT ====================== -->
+  <div style="width:100%; max-width:900px; margin-top:40px;">
+    <div class="section-title">Sign Up State — Password Strength Indicator (additional field)</div>
+    <div style="display:flex; justify-content:center;">
+      <div class="auth-card" style="max-width:420px;">
+
+        <!-- Social -->
+        <div class="social-btn-row">
+          <button class="social-btn"><div class="social-icon-box">G</div><span>Google</span></button>
+          <button class="social-btn"><div class="social-icon-box">GH</div><span>GitHub</span></button>
+        </div>
+        <div class="divider"><hr class="divider-line"/><span class="divider-text">or continue with email</span><hr class="divider-line"/></div>
+
+        <!-- Full name -->
+        <div class="comp-wrap" style="margin-bottom:16px;">
+          <span class="comp-badge reuse" style="top:-12px;">[REUSE] FloatingLabelInput</span>
+          <div class="floating-field" style="margin-bottom:0;">
+            <span class="floating-label">Full Name</span>
+            <input class="floating-input" type="text" value="John Doe" readonly />
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="floating-field">
+          <span class="floating-label">Email address</span>
+          <input class="floating-input focused" type="email" value="you@example.com" readonly />
+        </div>
+
+        <!-- Password + strength -->
+        <!-- NEW COMPONENT: PasswordStrengthIndicator from src/components/PasswordStrengthIndicator.tsx -->
+        <div class="comp-wrap" style="margin-bottom:20px;">
+          <span class="comp-badge new" style="top:-12px;">[NEW] PasswordStrengthIndicator</span>
+          <div class="floating-field" style="margin-bottom:4px;">
+            <span class="floating-label">Password</span>
+            <div class="input-row">
+              <input class="floating-input" type="password" value="••••••••" readonly style="padding-right:40px;" />
+              <span class="input-suffix">👁</span>
+            </div>
+          </div>
+          <div class="strength-bar">
+            <div class="strength-segment filled"></div>
+            <div class="strength-segment filled"></div>
+            <div class="strength-segment filled"></div>
+            <div class="strength-segment"></div>
+          </div>
+          <div class="strength-label">Strength: Medium — add numbers or symbols</div>
+        </div>
+
+        <button class="submit-btn">Create account →</button>
+
+        <div class="toggle-row">
+          Already have an account? <a class="toggle-link">Sign in</a>
+        </div>
+        <div class="terms-row">
+          By creating an account you agree to our
+          <a class="terms-link">Terms of Service</a> and
+          <a class="terms-link">Privacy Policy</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== COMPONENTS SUMMARY ====================== -->
+  <div style="width:100%; max-width:900px; margin-top:40px;">
+    <div class="section-title">Component Map</div>
+    <table style="width:100%; border-collapse:collapse; font-size:12px; background:#fff; border:2px solid #333;">
+      <thead>
+        <tr style="background:#333; color:#fff;">
+          <th style="padding:8px 12px; text-align:left;">Component</th>
+          <th style="padding:8px 12px; text-align:left;">Status</th>
+          <th style="padding:8px 12px; text-align:left;">Location</th>
+          <th style="padding:8px 12px; text-align:left;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #ccc;">
+          <td style="padding:8px 12px;">FloatingLabelInput</td>
+          <td style="padding:8px 12px;"><span class="badge badge-reuse">[REUSE]</span></td>
+          <td style="padding:8px 12px;">src/components/ui/floating-label-input.tsx</td>
+          <td style="padding:8px 12px;">Replace plain input-dark inputs in SignInForm &amp; SignUpForm</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ccc;">
+          <td style="padding:8px 12px;">SignInForm</td>
+          <td style="padding:8px 12px;"><span class="badge badge-reuse">[REUSE]</span></td>
+          <td style="padding:8px 12px;">src/components/SignInForm.tsx</td>
+          <td style="padding:8px 12px;">Refactor to use FloatingLabelInput + add password toggle</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ccc;">
+          <td style="padding:8px 12px;">SignUpForm</td>
+          <td style="padding:8px 12px;"><span class="badge badge-reuse">[REUSE]</span></td>
+          <td style="padding:8px 12px;">src/components/SignUpForm.tsx</td>
+          <td style="padding:8px 12px;">Refactor to use FloatingLabelInput + add PasswordStrengthIndicator</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ccc;">
+          <td style="padding:8px 12px;">SocialAuthButtons</td>
+          <td style="padding:8px 12px;"><span class="badge badge-new">[NEW]</span></td>
+          <td style="padding:8px 12px;">src/components/SocialAuthButtons.tsx</td>
+          <td style="padding:8px 12px;">Google + GitHub buttons with real onClick handlers (better-auth)</td>
+        </tr>
+        <tr style="border-bottom:1px solid #ccc;">
+          <td style="padding:8px 12px;">PasswordStrengthIndicator</td>
+          <td style="padding:8px 12px;"><span class="badge badge-new">[NEW]</span></td>
+          <td style="padding:8px 12px;">src/components/PasswordStrengthIndicator.tsx</td>
+          <td style="padding:8px 12px;">Shows strength bar + label as user types; for SignUpForm only</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">SocialProof</td>
+          <td style="padding:8px 12px;"><span class="badge badge-new">[NEW]</span></td>
+          <td style="padding:8px 12px;">src/components/SocialProof.tsx</td>
+          <td style="padding:8px 12px;">Avatar stack + dev count text above the card</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
